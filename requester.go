@@ -21,19 +21,19 @@ func NewClient(client *http.Client) *Client {
 func (c *Client) GetRequest(method string, url string, body io.Reader) ([]byte, error) {
 	req, err := http.NewRequest(method, url, body)
 	if err != nil {
-		return nil, fmt.Errorf("Exmo_GetRequest -> %w", err)
+		return nil, fmt.Errorf("Client_GetRequest -> %w", err)
 	}
 	req.Header.Set("Content-Type", "application/x-www-form-urlencoded")
 
 	resp, err := c.client.Do(req)
 	if err != nil {
-		return nil, fmt.Errorf("Exmo_GetRequest -> %w", err)
+		return nil, fmt.Errorf("Client_GetRequest -> %w", err)
 	}
 	defer resp.Body.Close()
 
 	bodyText, err := io.ReadAll(resp.Body)
 	if err != nil {
-		return nil, fmt.Errorf("Exmo_GetRequest -> %w", err)
+		return nil, fmt.Errorf("Client_GetRequest -> %w", err)
 	}
 
 	return bodyText, nil
